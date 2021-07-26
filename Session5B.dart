@@ -45,7 +45,7 @@
 */
 
 // Structure of Object
-
+// MODEL 
 class Dish{
   // Attributes 
   // Belongs to Object :)
@@ -66,23 +66,133 @@ class Dish{
     print("this is:"+this.hashCode.toString());
   }*/
 
+  void setTitle(String title){
+    this.title = title;
+  }
+
+  void setPrice(int price){
+    this.price = price;
+  }
+
+  String getTitle(){
+    return title!;
+  }
+
+  int getPrice(){
+    return price!;
+  }
+
   // Method
   void showDish(){
-    print("Dish Details: ${title} ${price}");
+    print("-------------------------");
+    print("Dish: ${title}\n\u20b9${price}");
+    print("-------------------------");
   }
+}
+
+class Menu{
+    String? title;
+    int? numOfDishes; 
+    List<Dish>? dishes; // 1 to many
+
+    Menu({this.title, this.numOfDishes, this.dishes});
+
+    void showMenu(){
+      print("MENU DETAILS");
+      print("~~~~~~~~~~~~");
+
+      print("Title ${title} [${numOfDishes}]");
+
+      dishes!.forEach((dish) {
+        dish.showDish();
+      });
+
+    }
+}
+
+class Restaurant{
+    String? name, phone, email, address, operatingHours;
+    double? ratings;
+    Menu? menu; // 1 to 1
+    Restaurant({this.name, this.phone, this.email, this.address, this.ratings, this.operatingHours, this.menu});
+
+    void showRestaurant(){
+      print("#######################");
+      print("${name} ${ratings}\n${operatingHours}\n${address}");
+      print("#######################");
+
+      menu!.showMenu();
+    }
 }
 
 void main() {
   
-  Dish dish1 = new Dish(title: "Dal Makhani", price: 200);
+  /*Dish dish1 = new Dish(title: "Dal Makhani", price: 200);
   Dish dish2 = Dish(title: "Paneer Butter Masala", price: 300);
   
   Dish dish3 = Dish();
+  dish3.title = "Noodles";
+  dish3.price = 15;
 
   print("dish1 is: "+dish1.hashCode.toString());
   print("dish2 is: "+dish2.hashCode.toString());
   
   dish1.showDish();
   dish2.showDish();
+  */
+
+  //var dishes = <Dish>[dish1, dish2, dish3];
+  //Menu menu = Menu(title: "Veggie Delight", dishes:  <Dish>[dish1, dish2, dish3], numOfDishes: 3);
+  //Menu menu = Menu(title: "Veggie Delight", dishes:  <Dish>[Dish(title: "Dal Makhani", price: 200), dish2, dish3], numOfDishes: 3);
+  
+  /*Menu menu = Menu(
+    title: "Veggie Delight", 
+    dishes:  <Dish>[
+      Dish(
+        title: "Dal Makhani", 
+        price: 200
+        ), 
+      Dish(
+        title: "Paneer Butter Masala", 
+        price: 300
+        ), 
+      Dish(
+        title: "Noodles", 
+        price: 150
+        )
+      ], 
+      numOfDishes: 3
+  );
+
+  menu.showMenu();*/
+
+  Restaurant(
+    name: "Johns Cafe Shop",
+    phone: "+91 161 555555",
+    email: "john.cafe@example.com",
+    operatingHours: "10:00 to 20:00",
+    ratings: 4.5,
+    address: "Model Town",
+    menu: Menu(
+      title: "Veggie Delight",
+      numOfDishes: 3,
+      dishes: <Dish>[
+      Dish(
+        title: "Dal Makhani", 
+        price: 200
+        ), 
+      Dish(
+        title: "Paneer Butter Masala", 
+        price: 300
+        ), 
+      Dish(
+        title: "Noodles", 
+        price: 150
+        )
+      ], 
+    )
+  ).showRestaurant();
+    
+
  
 }
